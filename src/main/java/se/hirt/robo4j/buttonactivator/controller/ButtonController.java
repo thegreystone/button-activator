@@ -34,7 +34,6 @@ package se.hirt.robo4j.buttonactivator.controller;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import com.pi4j.io.gpio.RaspiPin;
 import com.robo4j.ConfigurationException;
 import com.robo4j.CriticalSectionTrait;
 import com.robo4j.RoboContext;
@@ -99,7 +98,7 @@ public class ButtonController extends RoboUnit<String> {
 		}
 		endInput = endInputParam;
 		
-		servo = new PWMServo(RaspiPin.getPinByAddress(pinAddress), false);
+		servo = new PWMServo(pinAddress, false);
 		try {
 			servo.setInput(startInput);
 		} catch (IOException e) {
