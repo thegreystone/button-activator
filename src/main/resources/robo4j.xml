@@ -13,7 +13,7 @@
 			<value name="endInput" type="float">0.15</value>
 			<!-- The time to wait from initiating the press to initiate the withdrawal, 
 				in millis -->
-			<value name="pressTime" typ="int">200</value>
+			<value name="pressTime" type="int">200</value>
 		</config>
 	</roboUnit>
 	
