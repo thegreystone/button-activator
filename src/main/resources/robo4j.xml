@@ -7,7 +7,7 @@
             <!-- The servo start input (normalized -1 to 1) -->
             <value name="startInput" type="float">0.65</value>
             <!-- The servo end input (normalized -1 to 1) -->
-            <value name="endInput" type="float">-0.3</value>
+            <value name="endInput" type="float">0.15</value>
             <!-- The time to wait from initiating the press
                  to initiate the withdrawal, in millis -->
             <value name="pressTime" typ="int">400</value>
