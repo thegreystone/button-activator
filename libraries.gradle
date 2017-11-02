@@ -29,3 +29,11 @@
  *
  * Copyright (C) Marcus Hirt, 2017
  */
+
+println "configure $project"
+
+ext {
+    robo4jVersion = "alpha-0.3"
+    gradleVersion = "3.4"
+    junitVersion = "4.12"
+}
