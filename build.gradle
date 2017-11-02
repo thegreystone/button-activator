@@ -15,14 +15,13 @@ repositories {
     mavenLocal()
 }
 
-//create a single Jar with all dependencies
+// Create a single Jar with most dependencies
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'button-activator',
                 'Implementation-Version': version,
                 'Main-Class': 'se.hirt.robo4j.buttonactivator.ButtonActivatorMain'
     }
-    //baseName = project.name + '-all'
     baseName = 'button-activator'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
