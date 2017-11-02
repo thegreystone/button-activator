@@ -1,3 +1,5 @@
+<!-- Use the robo4j-hw-rpi example com.robo4j.hw.rpi.pwm.PWMServoExample to
+     figure out the startInput and endInput values. -->
 <robo4j>
     <roboUnit id="controller">
         <class>se.hirt.robo4j.buttonactivator.controller.ButtonController</class>
