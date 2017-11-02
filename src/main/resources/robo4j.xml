@@ -1,0 +1,16 @@
+<robo4j>
+    <roboUnit id="controller">
+        <class>se.hirt.robo4j.buttonactivator.controller.ButtonController</class>
+        <config name="com.robo4j.root">
+        		<!-- The pin address (RaspiPin) -->
+            <value name="pinAdress" type="int">1</value>
+            <!-- The servo start input (normalized -1 to 1) -->
+            <value name="startInput" type="float">0.65</value>
+            <!-- The servo end input (normalized -1 to 1) -->
+            <value name="endInput" type="float">-0.3</value>
+            <!-- The time to wait from initiating the press
+                 to initiate the withdrawal, in millis -->
+            <value name="pressTime" typ="int">400</value>
+        </config>
+    </roboUnit>
+</robo4j>

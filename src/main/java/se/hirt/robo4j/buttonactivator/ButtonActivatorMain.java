@@ -42,7 +42,7 @@ import com.robo4j.util.SystemUtil;
 /**
  * Run this class to initialize Robo4J.
  * 
- * @author Marcus
+ * @author Marcus Hirt (@hirt)
  */
 public class ButtonActivatorMain {
 	public static void main(String[] args) throws RoboBuilderException, IOException {
@@ -56,9 +56,12 @@ public class ButtonActivatorMain {
 		System.out.println("State after start:");
 		System.out.println(SystemUtil.printStateReport(ctx));
 
-		final RoboReference<?> httpRef = ctx.getReference("http");
-		final RoboReference<?> ctrlRef = ctx.getReference("controller");
-		System.out.println(SystemUtil.printSocketEndPoint(httpRef, ctrlRef));
+		// final RoboReference<?> httpRef = ctx.getReference("http");
+		final RoboReference<String> ctrlRef = ctx.getReference("controller");
+
+		// Schedule one initial button press on startup, just because I am too
+		// lazy to write tests.
+		ctrlRef.sendMessage("press");
 
 		System.out.println("Press enter to quit!");
 		System.in.read();
