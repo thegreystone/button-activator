@@ -1,18 +1,29 @@
-<!-- Use the robo4j-hw-rpi example com.robo4j.hw.rpi.pwm.PWMServoExample to
-     figure out the startInput and endInput values. -->
+<!-- Use the robo4j-hw-rpi example com.robo4j.hw.rpi.pwm.PWMServoExample 
+	to figure out the startInput and endInput values. -->
 <robo4j>
-    <roboUnit id="controller">
-        <class>se.hirt.robo4j.buttonactivator.controller.ButtonController</class>
-        <config name="com.robo4j.root">
-        		<!-- The pin address (RaspiPin) -->
-            <value name="pinAdress" type="int">1</value>
-            <!-- The servo start input (normalized -1 to 1) -->
-            <value name="startInput" type="float">0.65</value>
-            <!-- The servo end input (normalized -1 to 1) -->
-            <value name="endInput" type="float">0.15</value>
-            <!-- The time to wait from initiating the press
-                 to initiate the withdrawal, in millis -->
-            <value name="pressTime" typ="int">400</value>
-        </config>
-    </roboUnit>
+	<roboUnit id="controller">
+		<class>se.hirt.robo4j.buttonactivator.controller.ButtonController
+		</class>
+		<config name="com.robo4j.root">
+			<!-- The pin address (RaspiPin) -->
+			<value name="pinAdress" type="int">1</value>
+			<!-- The servo start input (normalized -1 to 1) -->
+			<value name="startInput" type="float">0.8</value>
+			<!-- The servo end input (normalized -1 to 1) -->
+			<value name="endInput" type="float">0.15</value>
+			<!-- The time to wait from initiating the press to initiate the withdrawal, 
+				in millis -->
+			<value name="pressTime" typ="int">200</value>
+		</config>
+	</roboUnit>
+	
+	<!-- Want to control the button over http ;) -->
+	<roboUnit id="http">
+		<class>com.robo4j.socket.http.units.HttpServerUnit</class>
+		<config name="com.robo4j.root">
+			<value name="port" type="int">8025</value>
+			<value name="target" type="String">controller</value>
+			<value name="targetUnits" type="String">{"controller":"GET"}</value>
+		</config>
+	</roboUnit>
 </robo4j>
