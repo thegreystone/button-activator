@@ -71,8 +71,10 @@ public class ButtonController extends RoboUnit<String> {
 	}
 
 	private void process(String message) {
-		if ("press".equals(message)) {
+		if ("push".equals(message)) {
 			schedulePress();
+		} else {
+			SimpleLoggingUtil.print(getClass(), "Got unknown message " + message);
 		}
 	}
 
