@@ -62,7 +62,7 @@ public class ButtonActivatorMain {
 
 		// Schedule one initial button press on startup, just because I am too
 		// lazy to write tests.
-		ctrlRef.sendMessage("press");
+		ctrlRef.sendMessage("push");
 
 		System.out.println("Press enter to quit!");
 		System.in.read();
