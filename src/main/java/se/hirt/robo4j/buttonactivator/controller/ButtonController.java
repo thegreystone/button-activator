@@ -34,6 +34,7 @@ package se.hirt.robo4j.buttonactivator.controller;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import com.pi4j.io.gpio.GpioFactory;
 import com.robo4j.ConfigurationException;
 import com.robo4j.CriticalSectionTrait;
 import com.robo4j.RoboContext;
@@ -122,6 +123,12 @@ public class ButtonController extends RoboUnit<String> {
 		} catch (IOException e) {
 			SimpleLoggingUtil.error(getClass(), "Could not move servo to start point");
 		}
+	}
+
+	@Override
+	public void shutdown() {
+		super.shutdown();
+		GpioFactory.getInstance().shutdown();
 	}
 
 }
