@@ -13,6 +13,7 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 // Create a single Jar with most dependencies
@@ -32,8 +33,8 @@ task wrapper(type: Wrapper) {
 }
 
 dependencies {
+    compile "com.pi4j:pi4j-core:${pi4jVersion}"
     compile "com.robo4j:robo4j-core:${robo4jVersion}"
     compile "com.robo4j:robo4j-hw-rpi:${robo4jVersion}"
     compile "com.robo4j:robo4j-socket-http:${robo4jVersion}"
-    compile "com.pi4j:pi4j-core:${pi4jVersion}"
 }

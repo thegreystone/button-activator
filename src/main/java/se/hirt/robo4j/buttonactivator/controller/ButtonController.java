@@ -31,9 +31,6 @@
  */
 package se.hirt.robo4j.buttonactivator.controller;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import com.pi4j.io.gpio.GpioFactory;
 import com.robo4j.ConfigurationException;
 import com.robo4j.CriticalSectionTrait;
@@ -42,93 +39,97 @@ import com.robo4j.RoboUnit;
 import com.robo4j.configuration.Configuration;
 import com.robo4j.hw.rpi.pwm.PWMServo;
 import com.robo4j.logging.SimpleLoggingUtil;
+import com.robo4j.socket.http.codec.StringMessage;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This configurable controller will control the button presses.
- * 
+ *
  * @author Marcus Hirt (@hirt)
  */
 @CriticalSectionTrait
-public class ButtonController extends RoboUnit<String> {
-	private int pressTime;
-	private float startInput;
-	private float endInput;
-	private int pinAddress;
-	private PWMServo servo;
-	
-	private boolean isButtonPressRunning;
+public class ButtonController extends RoboUnit<StringMessage> {
+    private int pressTime;
+    private float startInput;
+    private float endInput;
+    private int pinAddress;
+    private PWMServo servo;
 
-	public ButtonController(RoboContext context, String id) {
-		super(String.class, context, id);
-	}
+    private boolean isButtonPressRunning;
 
-	@Override
-	public void onMessage(String message) {
-		if (!isButtonPressRunning) {
-			process(message);
-		} else {
-			SimpleLoggingUtil.print(getClass(), "Skipping " + message + " due to test already running!");
-		}
-	}
+    public ButtonController(RoboContext context, String id) {
+        super(StringMessage.class, context, id);
+    }
 
-	private void process(String message) {
-		if ("push".equals(message)) {
-			schedulePress();
-		} else {
-			SimpleLoggingUtil.print(getClass(), "Got unknown message " + message);
-		}
-	}
+    @Override
+    public void onMessage(StringMessage message) {
+        if (!isButtonPressRunning) {
+            process(message.getMessage());
+        } else {
+            SimpleLoggingUtil.print(getClass(), "Skipping " + message + " due to test already running!");
+        }
+    }
 
-	private void schedulePress() {
-		moveToEnd();		
-		getContext().getScheduler().schedule(this::moveToStart, pressTime, TimeUnit.MILLISECONDS);
-	}
+    private void process(String message) {
+        if ("push".equals(message)) {
+            schedulePress();
+        } else {
+            SimpleLoggingUtil.print(getClass(), "Got unknown message " + message);
+        }
+    }
 
-	@Override
-	public void onInitialization(Configuration configuration) throws ConfigurationException {
-		pressTime = configuration.getInteger("pressTime", 400);
-		pinAddress = configuration.getInteger("pinAddress", 1);
+    private void schedulePress() {
+        moveToEnd();
+        getContext().getScheduler().schedule(this::moveToStart, pressTime, TimeUnit.MILLISECONDS);
+    }
 
-		Float startInputParam = configuration.getFloat("startInput", null);
-		if (startInputParam == null) {
-			throw ConfigurationException.createMissingConfigNameException("startInput");
-		}
-		startInput = startInputParam;
-		
-		Float endInputParam = configuration.getFloat("endInput", null);
-		if (endInputParam == null) {
-			throw ConfigurationException.createMissingConfigNameException("endInput");
-		}
-		endInput = endInputParam;
-		
-		servo = new PWMServo(pinAddress, false);
-		try {
-			servo.setInput(startInput);
-		} catch (IOException e) {
-			throw new ConfigurationException("Could not initialize servo start position", e);
-		}
-	}
-	
-	public void moveToEnd() {
-		try {
-			servo.setInput(endInput);
-		} catch (IOException e) {
-			SimpleLoggingUtil.error(getClass(), "Could not move servo to press end point");
-		}
-	}
-	
-	public void moveToStart() {
-		try {
-			servo.setInput(startInput);
-		} catch (IOException e) {
-			SimpleLoggingUtil.error(getClass(), "Could not move servo to start point");
-		}
-	}
+    @Override
+    public void onInitialization(Configuration configuration) throws ConfigurationException {
+        pressTime = configuration.getInteger("pressTime", 400);
+        pinAddress = configuration.getInteger("pinAddress", 1);
 
-	@Override
-	public void shutdown() {
-		super.shutdown();
-		GpioFactory.getInstance().shutdown();
-	}
+        Float startInputParam = configuration.getFloat("startInput", null);
+        if (startInputParam == null) {
+            throw ConfigurationException.createMissingConfigNameException("startInput");
+        }
+        startInput = startInputParam;
+
+        Float endInputParam = configuration.getFloat("endInput", null);
+        if (endInputParam == null) {
+            throw ConfigurationException.createMissingConfigNameException("endInput");
+        }
+        endInput = endInputParam;
+
+        servo = new PWMServo(pinAddress, false);
+        try {
+            servo.setInput(startInput);
+        } catch (IOException e) {
+            throw new ConfigurationException("Could not initialize servo start position", e);
+        }
+    }
+
+    public void moveToEnd() {
+        try {
+            servo.setInput(endInput);
+        } catch (IOException e) {
+            SimpleLoggingUtil.error(getClass(), "Could not move servo to press end point");
+        }
+    }
+
+    public void moveToStart() {
+        try {
+            servo.setInput(startInput);
+        } catch (IOException e) {
+            SimpleLoggingUtil.error(getClass(), "Could not move servo to start point");
+        }
+    }
+
+    @Override
+    public void shutdown() {
+        super.shutdown();
+        GpioFactory.getInstance().shutdown();
+    }
 
 }
