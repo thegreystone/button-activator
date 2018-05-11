@@ -36,5 +36,4 @@ ext {
     robo4jVersion = "alpha-0.3"
     gradleVersion = "4.7"
     junitVersion = "4.12"
-    pi4jVersion = "1.2-SNAPSHOT"
 }
