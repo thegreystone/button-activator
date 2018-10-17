@@ -1,10 +1,13 @@
-group 'com.robo4j'
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'maven'
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'application'
+}
 
 apply from: 'libraries.gradle'
+
+group 'se.hirt.robo4j.buttonactivator'
 
 version "${robo4jVersion}"
 
@@ -34,7 +37,6 @@ dependencies {
     compile "com.robo4j:robo4j-socket-http:${robo4jVersion}"
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = "${gradleVersion}"
+wrapper {
+    gradleVersion = "${roboGradleVersion}"
 }
-

@@ -33,7 +33,7 @@
 println "configure $project"
 
 ext {
-    robo4jVersion = "alpha-0.3"
-    gradleVersion = "4.7"
+    robo4jVersion = "alpha-0.4"
+    roboGradleVersion = "4.10"
     junitVersion = "4.12"
 }
