@@ -37,6 +37,7 @@ import com.robo4j.RoboBuilder;
 import com.robo4j.RoboBuilderException;
 import com.robo4j.RoboContext;
 import com.robo4j.RoboReference;
+import com.robo4j.socket.http.codec.StringMessage;
 import com.robo4j.util.SystemUtil;
 
 /**
@@ -58,12 +59,12 @@ public class ButtonActivatorMain {
 		System.out.println(SystemUtil.printStateReport(ctx));
 
 		final RoboReference<?> httpRef = ctx.getReference("http");
-		final RoboReference<String> ctrlRef = ctx.getReference("controller");
+		final RoboReference<StringMessage> ctrlRef = ctx.getReference("controller");
 		System.out.println(SystemUtil.printSocketEndPoint(httpRef, ctrlRef));
 
 		// Schedule one initial button press on startup, just because I am too
 		// lazy to write tests.
-		ctrlRef.sendMessage("push");
+		ctrlRef.sendMessage(new StringMessage("push"));
 
 		System.out.println("Press enter to quit!");
 		System.in.read();
