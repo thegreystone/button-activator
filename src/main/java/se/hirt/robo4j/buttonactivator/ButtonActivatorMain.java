@@ -46,7 +46,8 @@ import com.robo4j.util.SystemUtil;
  */
 public class ButtonActivatorMain {
 	public static void main(String[] args) throws RoboBuilderException, IOException {
-		RoboBuilder builder = new RoboBuilder().add(ButtonActivatorMain.class.getClassLoader().getResourceAsStream("robo4j.xml"));
+		RoboBuilder builder = new RoboBuilder(ButtonActivatorMain.class.getClassLoader().getResourceAsStream("robo4jsystem.xml"))
+				.add(ButtonActivatorMain.class.getClassLoader().getResourceAsStream("robo4j.xml"));
 		RoboContext ctx = builder.build();
 
 		System.out.println("State before start:");
