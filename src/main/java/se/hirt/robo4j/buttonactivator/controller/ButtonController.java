@@ -43,7 +43,6 @@ import com.robo4j.configuration.Configuration;
 import com.robo4j.hw.rpi.pwm.PWMServo;
 import com.robo4j.logging.SimpleLoggingUtil;
 import com.robo4j.socket.http.codec.StringMessage;
-import com.sun.xml.internal.ws.resources.StreamingMessages;
 
 /**
  * This configurable controller will control the button presses.
