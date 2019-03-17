@@ -42,6 +42,7 @@ import com.robo4j.RoboUnit;
 import com.robo4j.configuration.Configuration;
 import com.robo4j.hw.rpi.pwm.PWMServo;
 import com.robo4j.logging.SimpleLoggingUtil;
+import com.robo4j.socket.http.codec.StringMessage;
 
 /**
  * This configurable controller will control the button presses.
@@ -49,7 +50,7 @@ import com.robo4j.logging.SimpleLoggingUtil;
  * @author Marcus Hirt (@hirt)
  */
 @CriticalSectionTrait
-public class ButtonController extends RoboUnit<String> {
+public class ButtonController extends RoboUnit<StringMessage> {
 	private int pressTime;
 	private float startInput;
 	private float endInput;
@@ -59,11 +60,11 @@ public class ButtonController extends RoboUnit<String> {
 	private boolean isButtonPressRunning;
 
 	public ButtonController(RoboContext context, String id) {
-		super(String.class, context, id);
+		super(StringMessage.class, context, id);
 	}
 
 	@Override
-	public void onMessage(String message) {
+	public void onMessage(StringMessage message) {
 		if (!isButtonPressRunning) {
 			process(message);
 		} else {
@@ -71,8 +72,8 @@ public class ButtonController extends RoboUnit<String> {
 		}
 	}
 
-	private void process(String message) {
-		if ("push".equals(message)) {
+	private void process(StringMessage message) {
+		if ("push".equals(message.getMessage())) {
 			schedulePress();
 		} else {
 			SimpleLoggingUtil.print(getClass(), "Got unknown message " + message);
