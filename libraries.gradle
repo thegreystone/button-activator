@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2017 Marcus Hirt
- *                     www.hirt.se
+ *  Copyright (C) 2017, 2018 Marcus Hirt
+ *                           www.hirt.se
  *
  * This software is free:
  *
@@ -26,15 +26,13 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * Copyright (C) Marcus Hirt, 2017
  */
 
 println "configure $project"
 
 ext {
-    robo4jVersion = "alpha-0.4"
-    gradleVersion = "3.4"
+    robo4jVersion = "0.5-SNAPSHOT"
     junitVersion = "4.12"
     pi4jVersion = "1.2-SNAPSHOT"
+    javaVersion = "11"
 }

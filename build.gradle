@@ -8,7 +8,7 @@ apply from: 'libraries.gradle'
 
 version "${robo4jVersion}"
 
-sourceCompatibility = 1.8
+sourceCompatibility = "${javaVersion}"
 
 repositories {
     mavenCentral()
@@ -26,10 +26,6 @@ task fatJar(type: Jar) {
     baseName = 'button-activator'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = "${gradleVersion}"
 }
 
 dependencies {

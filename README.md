@@ -22,5 +22,5 @@ Next build the fatJar for the button activator:
 
 Finally run it (don't forget to source the environment.sh from Robo4J):
 ```bash
-sudo java -cp $ROBO4J_PATH:/build/libs/button-activator-alpha-0.4.jar se.hirt.robo4j.buttonactivator.ButtonActivatorMain
+sudo java -cp $ROBO4J_PATH:/build/libs/button-activator-0.5-SNAPSHOT.jar se.hirt.robo4j.buttonactivator.ButtonActivatorMain
 ```
